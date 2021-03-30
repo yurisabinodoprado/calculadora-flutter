@@ -1,0 +1,29 @@
+name: calculadora
+description: A new Flutter project.
+
+version: 1.0.0+1
+
+environment:
+  sdk: ">=2.1.0 <3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  auto_size_text: ^2.1.0
+  share: ^0.6.5+4
+
+dev_dependencies:
+  flutter_native_splash: ^0.3.2
+  flutter_test:
+    sdk: flutter
+
+flutter_native_splash:
+  color: "#1f1c1c"
+  image: icon_image/ic_launcher.png
+
+flutter:
+  fonts:
+    - family: Calculator
+      fonts:
+        - asset: font/Calculator.ttf
+  uses-material-design: true
