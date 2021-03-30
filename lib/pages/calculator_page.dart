@@ -18,7 +18,7 @@ class _CalculatorPageState extends State<CalculatorPage> {
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          _buildDisplay(text: _controller.result),
+          _buildDisplay(text: _controller.result, text2: _controller.display),
           Divider(color: Colors.white),
           _buildKeyboard(),
         ],
@@ -52,17 +52,40 @@ class _CalculatorPageState extends State<CalculatorPage> {
         )));
   }
 
-  Widget _buildDisplay({String text}) {
+  Widget _buildDisplay({String text, String text2}) {
     return Expanded(
-      child: Container(
-        padding: EdgeInsets.symmetric(horizontal: 20),
-        alignment: Alignment.bottomRight,
-        child: Text(
-          text ?? '0',
-          textAlign: TextAlign.end,
-          style: TextStyle(
-              color: Colors.white, fontSize: 52, fontFamily: "Calculator"),
-        ),
+      child: Column(
+        children: [
+          Expanded(
+            child: Container(
+              padding: EdgeInsets.symmetric(horizontal: 20),
+              alignment: Alignment.bottomRight,
+              child: Text(
+                text2 ?? '0',
+                textAlign: TextAlign.end,
+                style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 52,
+                    fontFamily: "Calculator"),
+              ),
+            ),
+          ),
+          Expanded(
+            child: Container(
+              color: Colors.black,
+              padding: EdgeInsets.symmetric(horizontal: 20),
+              alignment: Alignment.bottomRight,
+              child: Text(
+                text ?? '0',
+                textAlign: TextAlign.end,
+                style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 52,
+                    fontFamily: "Calculator"),
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }

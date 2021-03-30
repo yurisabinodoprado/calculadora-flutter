@@ -6,12 +6,12 @@ class CalculatorController {
   static const kPoint = ',';
   static const kEmpty = '';
   static const kOperations = ['+', '-', 'x', '/', '%', '='];
-
   List<double> _memories = [0.0, 0.0];
   int _currentMemoryIndex = 0;
   String _operation;
   bool _usedOperation;
   String result;
+  String display;
   bool _usedEqual;
   CalculatorController() {
     _clear();
@@ -24,14 +24,21 @@ class CalculatorController {
     _operation = kOperationNull;
     _usedOperation = false;
     _usedEqual = false;
+    display = kEmpty;
   }
 
   void _deleteDigit() {
     final length = result.length;
+    final length1 = display.length;
     if (length > 1) {
       result = result.substring(0, length - 1);
     } else {
       result = kZero;
+    }
+    if (length1 > 1) {
+      display = display.substring(0, length1 - 1);
+    } else {
+      display = kZero;
     }
 
     _memories[_currentMemoryIndex] = double.parse(
@@ -45,6 +52,7 @@ class CalculatorController {
     if (result.contains(kPoint) && digit == kPoint) digit = kEmpty;
 
     result += digit;
+    display += digit;
 
     _memories[_currentMemoryIndex] = double.parse(
       result.replaceAll(kPoint, '.'),
@@ -94,6 +102,12 @@ class CalculatorController {
       _deleteDigit();
     } else if (kOperations.contains(command)) {
       _setOperation(command);
+      if (command != "=" &&
+          !display.endsWith('+') &&
+          !display.endsWith('-') &&
+          !display.endsWith('/') &&
+          !display.endsWith('x') &&
+          !display.endsWith('%')) display += command;
     } else {
       _addDigit(command);
     }
