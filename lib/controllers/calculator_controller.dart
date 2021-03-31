@@ -27,6 +27,16 @@ class CalculatorController {
     display = kEmpty;
   }
 
+  void _clear2() {
+    display = kEmpty;
+    _memories.setAll(kMemoryFirst, kMemoryClear);
+    _currentMemoryIndex = kMemoryFirst;
+    _operation = kOperationNull;
+    _usedOperation = false;
+    _usedEqual = false;
+    display = kEmpty;
+  }
+
   void _deleteDigit() {
     final length = result.length;
     final length1 = display.length;
@@ -40,7 +50,10 @@ class CalculatorController {
     } else {
       display = kZero;
     }
-
+    if (result == kZero) {
+      _clear2();
+    }
+    if (display == kEmpty) {}
     _memories[_currentMemoryIndex] = double.parse(
       result.replaceAll(kPoint, '.'),
     );
